@@ -15,11 +15,21 @@ if page == "Plant Disease Classification":
     uploaded_file = st.file_uploader("Choose a maize(corn) leaf image ...", type="jpg")
     if uploaded_file is not None:
         image = Image.open(uploaded_file)
-        st.image(image, caption='Uploaded MRI.', use_column_width=True)
+        st.image(image, caption='Uploaded corn leaf image.', use_column_width=True)
         st.write("")
         st.write("Classifying...")
         label = teachable_machine_classification(uploaded_file, 'model/corn_leaf_classification.h5')
-        st.write("")
+        if label == 0:
+            st.write("The image depicts healthy_corn")
+        elif label == 1:
+            st.write("The image depicts Common_rust")
+        elif label == 2:
+            st.write("The image depicts Cercospora_leaf_spot Gray_leaf_spot")
+        elif label == 3:
+            st.write("The image depicts Nothern_leaf_blight")
+        else:
+            st.write("Error")
+
 
 elif page == "Brain Tumor MRI Classification":
 
