@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-
+from img_classification import *
 
 st.sidebar.markdown("Welcome to Picture-lytics.")
 st.sidebar.selectbox("Link to the relevant datasets.", ["link 1","link 2"])# kaggle links to dataset
@@ -18,7 +18,7 @@ if page == "Plant Disease Classification":
         st.image(image, caption='Uploaded MRI.', use_column_width=True)
         st.write("")
         st.write("Classifying...")
-        label = predict(uploaded_file)
+        label = teachable_machine_classification(uploaded_file, 'model/corn_leaf_classification.h5')
         st.write("")
 
 elif page == "Brain Tumor MRI Classification":
@@ -33,5 +33,8 @@ elif page == "Brain Tumor MRI Classification":
         st.image(image, caption='Uploaded MRI.', use_column_width=True)
         st.write("")
         st.write("Classifying...")
-        label = predict(uploaded_file)
-        st.write("")
+        label = teachable_machine_classification(uploaded_file, 'model/brain_tumor_classification.h5')
+        if label == 0:
+            st.write("The MRI scan has a brain tumor")
+        else:
+            st.write("The MRI scan is healthy")
