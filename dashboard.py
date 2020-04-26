@@ -3,7 +3,8 @@ from PIL import Image
 from img_classification import *
 
 st.sidebar.markdown("Welcome to Picture-lytics.")
-st.sidebar.selectbox("Link to the relevant datasets.", ["link 1","link 2"])# kaggle links to dataset
+st.sidebar.selectbox("Link to the relevant datasets.", ["https://www.kaggle.com/vipoooool/new-plant-diseases-dataset",
+                                                        "https://www.kaggle.com/navoneel/brain-mri-images-for-brain-tumor-detection"])# kaggle links to dataset
 page = st.sidebar.selectbox("Choose task", ["Plant Disease Classification", "Brain Tumor MRI Classification"])# pages
 
 if page == "Plant Disease Classification":
@@ -18,7 +19,7 @@ if page == "Plant Disease Classification":
         st.image(image, caption='Uploaded corn leaf image.', use_column_width=True)
         st.write("")
         st.write("Classifying...")
-        label = teachable_machine_classification(uploaded_file, 'model/corn_leaf_classification.h5')
+        label = teachable_machine_classification(image, 'model/corn_leaf_classification.h5')
         if label == 0:
             st.write("The image depicts healthy_corn")
         elif label == 1:
@@ -43,7 +44,7 @@ elif page == "Brain Tumor MRI Classification":
         st.image(image, caption='Uploaded MRI.', use_column_width=True)
         st.write("")
         st.write("Classifying...")
-        label = teachable_machine_classification(uploaded_file, 'model/brain_tumor_classification.h5')
+        label = teachable_machine_classification(image, 'model/brain_tumor_classification.h5')
         if label == 0:
             st.write("The MRI scan has a brain tumor")
         else:

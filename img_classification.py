@@ -25,10 +25,6 @@ def teachable_machine_classification(img, file):
 
     #turn the image into a numpy array
     image_array = np.asarray(image)
-
-    # display the resized image
-    image.show()
-
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
@@ -37,4 +33,4 @@ def teachable_machine_classification(img, file):
 
     # run the inference
     prediction = model.predict(data)
-    return prediction
+    return np.argmax(prediction) # return position of the highest probability
