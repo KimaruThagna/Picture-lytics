@@ -1,4 +1,4 @@
-numpy==1.16.4
+numpy==1.22.0
 streamlit==0.52.1
 seaborn==0.9.0
 pandas==0.25.1
